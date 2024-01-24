@@ -101,6 +101,9 @@ app.patch("/user/:id",(req,res)=>{
 })
 
 // Add new user
+app.get("/user/new",(req,res)=>{
+  res.render("new.ejs");
+})
 
 // Delete a user if they have entered correct email a nd password
 

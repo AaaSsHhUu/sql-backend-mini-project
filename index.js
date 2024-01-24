@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
-
+const {v4 : uuidv4} = require("uuid");
 app.use(methodOverride("_method"));
 
 app.use(express.urlencoded({extended : true}));
@@ -105,7 +105,24 @@ app.get("/user/new",(req,res)=>{
   res.render("new.ejs");
 })
 
-// Delete a user if they have entered correct email a nd password
+app.post("/user",(req,res)=>{
+  let id  = uuidv4();
+  let {username, email, password} = req.body;
+  // console.log(id,username,email,password);
+  let q = `InSERT INTO user VALUE('${id}','${username}','${email}','${password}')`;
+  try{
+    connection.query(q,(err,result)=>{
+      if(err) throw err;
+      res.redirect("/user");
+    })
+  }
+  catch(err){
+    res.render("Some error occured in DB");
+  }
+})
+
+// Delete a user if they have entered correct email and password
+
 
 app.listen("8080", ()=>{
   console.log(`Server is Listening to port 8080`);

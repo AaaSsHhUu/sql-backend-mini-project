@@ -122,6 +122,44 @@ app.post("/user",(req,res)=>{
 })
 
 // Delete a user if they have entered correct email and password
+app.get("/user/:id/delete",(req,res)=>{
+  let { id } = req.params;
+  let q = `SELECT * FROM user WHERE id = '${id}'`;
+  connection.query(q,(err,result)=>{
+    let data = result[0];
+    console.log(data);
+    res.render("delete.ejs",{data});
+  })
+})
+
+app.delete("/user/:id",(req,res)=>{
+  let {id} = req.params;
+  let q =  `SELECT * FROM user WHERE id = '${id}'`;
+  let {userEmail,userPass} = req.body;
+  try{
+    connection.query(q,(err,result)=>{
+      if(err) throw err;
+      let data = result[0];
+      let q = `DELETE FROM user where id='${id}'`;
+
+      if(userPass === data.password && userEmail === data.email){
+        connection.query(q,(err,result)=>{
+          if(err) throw err;
+          res.redirect("/user");
+        })
+      }
+      else{
+        // console.log(userEmail,userPass,data.email,data.password);
+        res.send("Invalid Email Or Password");
+      }
+    })
+  }
+  catch(err){
+    res.send("Some error occured in DB");
+  }
+  
+})
+
 
 
 app.listen("8080", ()=>{

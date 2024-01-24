@@ -11,6 +11,9 @@
         body{
             text-align: center;
         }
+        button{
+            margin: 4px 0;
+        }
     </style>
 </head>
 <body>
@@ -30,6 +33,10 @@
                 <td>
                     <form action="/user/<%= data.id %>/edit" method="get">
                         <button>Edit Username</button>
+                    </form>
+                    <br>
+                    <form action="/user/<%= data.id %>/delete" method="get">
+                        <button>Remove User</button>
                     </form>
                 </td>
             </tr>

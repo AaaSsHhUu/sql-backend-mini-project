@@ -160,6 +160,22 @@ app.delete("/user/:id",(req,res)=>{
   
 })
 
+// Search route
+app.get("/user/search",(req,res)=>{
+  let {search} = req.query;
+  console.log(search);
+  let q = `SELECT * from user where email = '${search}'`;
+  try{
+    connection.query(q,(err,result)=>{
+      if(err) throw err;
+      let data = result[0];
+      res.render("search.ejs",{data});
+    })
+  }
+  catch(err){
+    res.send("Some error occured in DB");
+  }
+})
 
 
 app.listen("8080", ()=>{

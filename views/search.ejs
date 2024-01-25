@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search page</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        tr,th,td{
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Options</th>
+        </tr>
+        <tr>
+            <td><%= data.id  %></td>
+            <td><%= data.username  %></td>
+            <td><%= data.email %></td>
+            <td>
+                <form action="/user/<%= data.id %>/edit" method="get">
+                    <button>Edit Username</button>
+                </form>
+                <br>
+                <form action="/user/<%= data.id %>/delete" method="get">
+                    <button>Remove User</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

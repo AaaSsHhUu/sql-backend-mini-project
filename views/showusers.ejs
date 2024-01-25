@@ -14,9 +14,16 @@
         button{
             margin: 4px 0;
         }
+        input{
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
+    <form action="/user/search" method="get">
+        <input type="email" required placeholder="Enter email" name="search">
+        <button>search</button>
+    </form>
     <table>
         <tr>
             <th>ID</th>
